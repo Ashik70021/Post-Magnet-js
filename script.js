@@ -7,6 +7,7 @@ const fetchAllPost = async (inputText = '') => {
 }
 
 const Categories = (posts) => {
+    console.log(posts)
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = '';
     // let activeBadge = '';
@@ -20,12 +21,23 @@ const Categories = (posts) => {
     }
 
     posts.forEach(post => {
-        console.log(post);
+
+        // const activeBadge = document.getElementById("active-badge");
+        let activeBadge = '';
+        if(post.isActive){
+            console.log("active")
+            activeBadge = ` 
+            <span class="indicator-item badge badge-secondary"></span>
+            `
+        }
+
+
+
         const postsDiv = document.createElement('div');
         postsDiv.classList = `mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]`;
         postsDiv.innerHTML = `
     <div class="indicator ml-8 mt-8">
-    <span id="active-badge" class=" hidden indicator-item badge badge-secondary"></span> 
+    ${activeBadge}
     <div class="grid w-[72px] h-[72px] bg-base-300 place-items-center"> <img class="rounded-2xl" src="${post.image}" alt=""></div>
   </div>
   <div class="ml-8 mt-8 pr-6">
@@ -53,39 +65,43 @@ const Categories = (posts) => {
             }</span>min</p>
         </div>
 
-        <div onclick="addToList('${post.title.replace(/'/g,'')}', '${post.view_count}'); totalMarkCount()" class="markButton ml-96 cursor-pointer">
-            <img src="images/email 1.png" alt="">
-        </div>
+        <div onclick="addToList('${post.title.replace(/'/g, '')}', '${post.view_count}'); totalMarkCount()" class="markButton ml-96 cursor-pointer">
+        <img src="images/email 1.png" alt="">
+    </div>
     </div>
 </div>
+
     `
-     postContainer.appendChild(postsDiv)
+
+
+
+        postContainer.appendChild(postsDiv)
     });
     toggleLoadingSpinnner(false);
 
 }
 
 const totalCount = document.getElementById("totalCount");
-const totalMarkCount = () =>{
+const totalMarkCount = () => {
     count++;
     console.log(count);
     totalCount.innerText = count;
 }
 
 const addToList = (title, view) => {
-            
-            const appendTitle = document.getElementById("append-title");
 
-            const appendItem = document.createElement('div');
-            appendItem.classList = `flex gap-20 bg-white m-4 pl-2 pr-2 rounded-md`;
-            appendItem.innerHTML = `
+    const appendTitle = document.getElementById("append-title");
+
+    const appendItem = document.createElement('div');
+    appendItem.classList = `flex gap-20 bg-white m-4 pl-2 pr-2 rounded-md`;
+    appendItem.innerHTML = `
             <h1 class="text-s font-bold text-[#12132d]">${title}</h1>
             <div class="flex gap-2">
                 <img src="images/view.png" alt="">
                 <p class="text-[#12132d99] text-lg font-normal">${view}</p>
             </div>
             `
-            appendTitle.appendChild(appendItem); 
+    appendTitle.appendChild(appendItem);
 }
 
 
@@ -106,7 +122,6 @@ const fetchLatestPosts = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const data = await res.json();
     const LatestPosts = data;
-    console.log(LatestPosts)
     showLatestPosts(LatestPosts);
 }
 
@@ -115,7 +130,6 @@ const showLatestPosts = (LatestPosts) => {
     latestDiv.innerHTML = '';
 
     LatestPosts.forEach(LatestPost => {
-        console.log(LatestPost);
         const newDiv = document.createElement('div');
         newDiv.classList = `card w-full border-slate-500 shadow-xl p-6`;
         newDiv.innerHTML = `
@@ -126,7 +140,7 @@ const showLatestPosts = (LatestPosts) => {
                     <div class="card-body">
                         <div class="flex gap-2">
                            <img src="images/date.png" alt="">
-                           <p class="text-xl font-normal text-[#12132d99]">${LatestPost.author.posted_date}</p>
+                           <p class="text-xl font-normal text-[#12132d99]">${LatestPost.author.posted_date?LatestPost.author.posted_date:"No publish Date"}</p>
                         </div>
                         <h1 class="mt-4 text-xl font-extrabold text-[#12132d]">${LatestPost.title}</h1>
                         <p class="text-lg font-normal text-[#12132d99]">${LatestPost.description}</p>
@@ -136,7 +150,7 @@ const showLatestPosts = (LatestPosts) => {
                             </div>
                             <div>
                                 <h2 class="card-title text-xl font-bold text-[#12132d]">${LatestPost.author.name}</h2>
-                                 <p class="text-lg font-normal text-[#12132d99]">${LatestPost.author.designation}</p>   
+                                 <p class="text-lg font-normal text-[#12132d99]">${LatestPost.author.designation?LatestPost.author.designation:"Unknown"} </p>   
                             </div>
                         </div>
                     </div>
