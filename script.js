@@ -10,7 +10,6 @@ const Categories = (posts) => {
     console.log(posts)
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = '';
-    // let activeBadge = '';
 
     const errorElement = document.getElementById('no-content-mesage');
     if (posts.length === 0) {
@@ -27,7 +26,11 @@ const Categories = (posts) => {
         if(post.isActive){
             console.log("active")
             activeBadge = ` 
-            <span class="indicator-item badge badge-secondary"></span>
+            <span class="indicator-item badge bg-green-500"></span>
+            `
+        }else{
+            activeBadge = ` 
+            <span class="indicator-item badge bg-red-500"></span>
             `
         }
 
