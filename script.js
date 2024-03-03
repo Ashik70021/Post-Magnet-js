@@ -1,33 +1,29 @@
-const fetchAllPost = async (inputText='posts') => {
+let count = 0;
+const fetchAllPost = async (inputText = '') => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputText}`);
     const data = await res.json();
     const posts = data.posts;
-    buttonClickCategories(posts);
+    Categories(posts);
 }
 
-// const fetchpostbyCategory = async (inputText) => {
-//     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputText}`);
-//     const data = await res.json();
-//     const searchPosts = data.posts;
-//     buttonClickCategories(searchPosts);
-// }
-
-const signInButton = document.getElementById("input-button");
-signInButton.addEventListener
-
-
-
-const buttonClickCategories = (posts) => {
+const Categories = (posts) => {
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = '';
     // let activeBadge = '';
-    
+
+    const errorElement = document.getElementById('no-content-mesage');
+    if (posts.length === 0) {
+        console.log("no content")
+        errorElement.classList.remove('hidden')
+    } else {
+        errorElement.classList.add('hidden')
+    }
+
     posts.forEach(post => {
-        console.log(post)
-     
+        console.log(post);
         const postsDiv = document.createElement('div');
-    postsDiv.classList = `mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]`;
-    postsDiv.innerHTML = `
+        postsDiv.classList = `mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]`;
+        postsDiv.innerHTML = `
     <div class="indicator ml-8 mt-8">
     <span id="active-badge" class=" hidden indicator-item badge badge-secondary"></span> 
     <div class="grid w-[72px] h-[72px] bg-base-300 place-items-center"> <img class="rounded-2xl" src="${post.image}" alt=""></div>
@@ -49,8 +45,7 @@ const buttonClickCategories = (posts) => {
         </div>
         <div class="flex gap-2">
             <img src="images/view.png" alt="">
-            <p class="text-[#12132d99] text-lg font-normal">${post.view_count
-            }</p>
+            <p class="text-[#12132d99] text-lg font-normal">${post.view_count}</p>
         </div>
         <div class="flex gap-2">
             <img src="images/clock.png" alt="">
@@ -58,44 +53,68 @@ const buttonClickCategories = (posts) => {
             }</span>min</p>
         </div>
 
-        <div class="ml-96">
+        <div onclick="addToList('${post.title.replace(/'/g,'')}', '${post.view_count}'); totalMarkCount()" class="markButton ml-96 cursor-pointer">
             <img src="images/email 1.png" alt="">
         </div>
     </div>
 </div>
     `
-    // const activeBadge = document.getElementById("active-badge");
-    // if(post.isActive == true){
-    //     activeBadge.classList.remove('hidden')
-    // }else{
-    //     activeBadge.classList.add('hidden')
-    // }
-
-    postContainer.appendChild(postsDiv)
+     postContainer.appendChild(postsDiv)
     });
-    
+    toggleLoadingSpinnner(false);
+
 }
 
-const handleSearch = () =>{
-     const inputField = document.getElementById('input-text');
-     inputText = inputField.value ;
-     console.log(inputText);
-     fetchAllPost(inputText);
+const totalCount = document.getElementById("totalCount");
+const totalMarkCount = () =>{
+    count++;
+    console.log(count);
+    totalCount.innerText = count;
 }
 
+const addToList = (title, view) => {
+            
+            const appendTitle = document.getElementById("append-title");
+
+            const appendItem = document.createElement('div');
+            appendItem.classList = `flex gap-20 bg-white m-4 pl-2 pr-2 rounded-md`;
+            appendItem.innerHTML = `
+            <h1 class="text-s font-bold text-[#12132d]">${title}</h1>
+            <div class="flex gap-2">
+                <img src="images/view.png" alt="">
+                <p class="text-[#12132d99] text-lg font-normal">${view}</p>
+            </div>
+            `
+            appendTitle.appendChild(appendItem); 
+}
+
+
+
+// search field
+
+const handleSearch = () => {
+    toggleLoadingSpinnner(true);
+    const inputField = document.getElementById('input-text');
+    inputText = inputField.value;
+    console.log(inputText);
+    fetchAllPost(inputText);
+}
+
+
+// latest post section
 const fetchLatestPosts = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const data = await res.json();
-    const LatestPosts  = data;
+    const LatestPosts = data;
     console.log(LatestPosts)
     showLatestPosts(LatestPosts);
 }
 
-const showLatestPosts = (LatestPosts) =>{
-        const latestDiv = document.getElementById('card-container');
-        latestDiv.innerHTML ='';
-        
-        LatestPosts.forEach(LatestPost => {
+const showLatestPosts = (LatestPosts) => {
+    const latestDiv = document.getElementById('card-container');
+    latestDiv.innerHTML = '';
+
+    LatestPosts.forEach(LatestPost => {
         console.log(LatestPost);
         const newDiv = document.createElement('div');
         newDiv.classList = `card w-full border-slate-500 shadow-xl p-6`;
@@ -125,12 +144,21 @@ const showLatestPosts = (LatestPosts) =>{
         
         `
         latestDiv.appendChild(newDiv);
-      })
+    })
 
-      
-      
-      
 }
+
+const toggleLoadingSpinnner = (isLoading) => {
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if (isLoading) {
+        loadingSpinner.classList.remove('hidden')
+    }
+    else {
+        loadingSpinner.classList.add('hidden')
+    }
+
+}
+// setTimeout(toggleLoadingSpinnner, 2000)
 
 
 fetchAllPost();

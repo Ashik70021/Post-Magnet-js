@@ -94,7 +94,7 @@
                     <div class="buttonIn">
                         <input id="input-text" type="text" placeholder="Search here anything"
                             class="input input-bordered input-md w-full max-w-xs rounded-[40px]" />
-                        <button id="input-button" onclick="handleSearch()" class="button btn bg-[#797DFC] text-white rounded-[40px]">Sign In</button>
+                        <button id="input-button" onclick="handleSearch()" class="button btn bg-[#797DFC] text-white rounded-[40px]">Search</button>
                     </div>
                 </div>
                 <!-- right side div -->
@@ -129,8 +129,16 @@
 
         </section>
 
+        <section class="container mx-auto mt-28">  
+            <h1 id="no-content-mesage" class="hidden text-6xl font-bold text-[#12132D] text-center">Opps!! No content available</h1> 
+        </section>
+
         <!-- discuss card -->
         <section class="container mx-auto">
+            <!-- loading -->
+            <div id="loading-spinner" class="text-center my-40 hidden">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
 
             <div class="flex flex-col lg:flex-row justify-between w-full mt-24">
                 <div id="post-container">
@@ -166,7 +174,7 @@
                                     <p class="text-[#12132d99] text-lg font-normal"> <span>5</span>min</p>
                                 </div>
 
-                                <div class="ml-96">
+                                <div class="markButton ml-96">
                                     <img src="images/email 1.png" alt="">
                                 </div>
                             </div>
@@ -178,22 +186,23 @@
                 <!-- title side -->
 
                 <div class="bg-[#f3f3f5] rounded-2xl h-fit">
-                    <div class="flex justify-between m-4">
-                        <h1 class="text-xl font-bold text-[#12132d] ">Title</h1>
-                        <div class="flex gap-2">
+                    <div class="flex justify-between m-4 w-full gap-x-48">
+                        <h1 class="text-xl font-bold text-[#12132d] pl-4 ">Title</h1>
+                        <div class="flex gap-2 pr-8">
                             <img src="images/mark.png" alt="">
-                            <p class="text-lg font-normal text-[#12132d99] ">Mark as read(<span>0</span>)</p>
+                            <p class="text-lg font-normal text-[#12132d99] ">Mark as read(<span id="totalCount">0</span>)</p>
                         </div>
                     </div>
                     <!-- append titles -->
-                    <div class="">
+                    <div id="append-title">
                         <!--  append titles start-->
                         <div class="flex gap-4 bg-white m-4 pl-2 pr-2 rounded-md">
-                            <h1 class="text-s font-bold text-[#12132d]">10 Kids Unaware of Their Halloween Costume</h1>
+        
+                            <!-- <h1 class="text-s font-bold text-[#12132d]">10 Kids Unaware of Their Halloween Costume</h1>
                             <div class="flex gap-2">
                                 <img src="images/view.png" alt="">
                                 <p class="text-[#12132d99] text-lg font-normal">1568</p>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- append titles end -->
                     </div>
