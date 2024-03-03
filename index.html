@@ -92,9 +92,9 @@
                         coffee mug!</p>
                     <!-- search fiels -->
                     <div class="buttonIn">
-                        <input type="text" placeholder="Search here anything"
+                        <input id="input-text" type="text" placeholder="Search here anything"
                             class="input input-bordered input-md w-full max-w-xs rounded-[40px]" />
-                        <button class="button btn bg-[#797DFC] text-white rounded-[40px]">Sign In</button>
+                        <button id="input-button" onclick="handleSearch()" class="button btn bg-[#797DFC] text-white rounded-[40px]">Sign In</button>
                     </div>
                 </div>
                 <!-- right side div -->
@@ -133,12 +133,13 @@
         <section class="container mx-auto">
 
             <div class="flex flex-col lg:flex-row justify-between w-full mt-24">
-                <div class="">
+                <div id="post-container">
                     <!-- append div start -->
-                    <div class=" mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]">
-                        <div class="ml-8 mt-8">
-                            <img class="w-12 h-12 rounded-2xl" src="images/verified.png" alt="">
-                        </div>
+                    <!-- <div class=" mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]">
+                        <div class="indicator ml-8 mt-8">
+                            <span class="hidden indicator-item badge badge-secondary"></span> 
+                            <div class="grid w-[72px] h-[72px] bg-base-300 place-items-center"> <img class="rounded-2xl" src="images/demo.jpg" alt=""></div>
+                          </div>
                         <div class="ml-8 mt-8 pr-6">
                             <div class="flex gap-6">
                                 <p class="text-xl font-medium text-[#12132dcc]"># <span>Music</span></p>
@@ -170,13 +171,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  -->
                     <!--  append div end -->
 
                 </div>
                 <!-- title side -->
 
-                <div class="bg-[#f3f3f5] rounded-2xl">
+                <div class="bg-[#f3f3f5] rounded-2xl h-fit">
                     <div class="flex justify-between m-4">
                         <h1 class="text-xl font-bold text-[#12132d] ">Title</h1>
                         <div class="flex gap-2">
@@ -233,30 +234,34 @@
 
         <!-- latest card section -->
         <section class="container mx-auto">
-            <div id="card-container" class=" mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                 <div class="card w-full border-slate-500 shadow-xl p-6">
-                   <figure class="overflow-hidden max-h-72 rounded-2xl">
-                         <img class="w-full " src="images/demo.jpg" alt="">
-                   </figure>
-                   <div class="card-body">
-                       <div class="flex gap-2">
-                          <img src="images/date.png" alt="">
-                          <p class="text-xl font-normal text-[#12132d99]">29 January 2024</p>
-                       </div>
-                       <h1 class="mt-4 text-xl font-extrabold text-[#12132d]">What will a mars habitat force that impact in our daily life!!!</h1>
-                       <p class="text-lg font-normal text-[#12132d99]">Yes, you can run unit tests and view the results directly within the app. </p>
-                       <div class="mt-4 flex space-x-4 justify-start items-start">
-                           <div>
-                               <img class="w-12 h-12 rounded-full" src="images/email 1.png" alt="">
-                           </div>
-                           <div>
-                               <h2 class="card-title text-xl font-bold text-[#12132d]">Cameron Williamson</h2>
-                                <p class="text-lg font-normal text-[#12132d99]">Unknown</p>   
-                           </div>
-                       </div>
-                   </div>
-               </div>  
-           </div>
+  
+            <div id="card-container" class="container mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- append start -->
+                <!-- <div class="card w-full border-slate-500 shadow-xl p-6">
+                    <figure class="overflow-hidden max-h-72 rounded-2xl">
+                          <img class="w-full " src="images/demo.jpg" alt="">
+                    </figure>
+                    <div class="card-body">
+                        <div class="flex gap-2">
+                           <img src="images/date.png" alt="">
+                           <p class="text-xl font-normal text-[#12132d99]">29 January 2024</p>
+                        </div>
+                        <h1 class="mt-4 text-xl font-extrabold text-[#12132d]">What will a mars habitat force that impact in our daily life!!!</h1>
+                        <p class="text-lg font-normal text-[#12132d99]">Yes, you can run unit tests and view the results directly within the app. </p>
+                        <div class="mt-4 flex space-x-4 justify-start items-start">
+                            <div>
+                                <img class="w-12 h-12 rounded-full" src="images/email 1.png" alt="">
+                            </div>
+                            <div>
+                                <h2 class="card-title text-xl font-bold text-[#12132d]">Cameron Williamson</h2>
+                                 <p class="text-lg font-normal text-[#12132d99]">Unknown</p>   
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- append end -->
+            </div> 
+        
         </section>
     </main>
 
@@ -287,7 +292,7 @@
 
 
     <!-- Script -->
-    <script src="script.js"></script>
+    <script src="script.js"></script> 
 </body>
 
 </html>
