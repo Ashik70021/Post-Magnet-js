@@ -50,10 +50,6 @@
 .banner-div{
     background: rgb(17,1,36);
     background: linear-gradient(180deg, rgba(17,1,36,1) 0%, rgba(3,3,92,1) 100%, rgba(0,0,0,1) 100%);
+    
 }
-
-.retroText{
-     color: rgb(3,111,196);  
-    /* color: linear-gradient(90deg, rgba(3,111,196,1) 0%, rgba(0,2,96,1) 100%, rgba(0,0,0,1) 100%); */  
-}  
 

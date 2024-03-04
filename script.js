@@ -39,17 +39,22 @@ const Categories = (posts) => {
         const postsDiv = document.createElement('div');
         postsDiv.classList = `mb-6 card card-side bg-base-100 shadow-xl bg-[#f3f3f5]`;
         postsDiv.innerHTML = `
+        <div class="flex">
     <div class="indicator ml-8 mt-8">
     ${activeBadge}
-    <div class="grid w-[72px] h-[72px] bg-base-300 place-items-center"> <img class="rounded-2xl" src="${post.image}" alt=""></div>
+    <div class=" w-[72px] h-[72px] bg-base-300 place-items-center"> <img class="rounded-2xl" src="${post.image}" alt=""></div>
   </div>
-  <div class="ml-8 mt-8 pr-6">
+  <div class="pl-8 pt-8 pr-6">
     <div class="flex gap-6">
         <p class="text-xl font-medium text-[#12132dcc]"># <span>${post.category}</span></p>
         <p class="text-xl font-medium text-[#12132dcc]">Author: <span>${post.author.name}</span></p>
     </div>
-    <h2 class="card-title text-2xl font-bold text-[#12132d] mt-3 mb-5">${post.title}</h2>
-    <p class="text-[#12132d99] text-xl font-medium">${post.description}</p>
+
+
+   <div class="p-2"> 
+   <h2 class="card-title text-2xl font-bold text-[#12132d] pt-3 pb-5">${post.title}</h2>
+   <p class="text-[#12132d99] text-lg font-medium">${post.description}</p>
+   </div>
 
     <hr class="border-dashed mt-4 mb-4">
 
@@ -70,10 +75,10 @@ const Categories = (posts) => {
 
         <div onclick="addToList('${post.title.replace(/'/g, '')}', '${post.view_count}'); totalMarkCount()" class="markButton ml-96 cursor-pointer">
         <img src="images/email 1.png" alt="">
+        </div>
     </div>
-    </div>
-</div>
-
+  </div>
+  </div>
     `
 
 
@@ -98,16 +103,14 @@ const addToList = (title, view) => {
     const appendItem = document.createElement('div');
     appendItem.classList = `flex gap-20 bg-white m-4 pl-2 pr-2 rounded-md`;
     appendItem.innerHTML = `
-            <h1 class="text-s font-bold text-[#12132d]">${title}</h1>
-            <div class="flex gap-2">
+            <h1 class="pt-4 pb-4 text-s font-bold text-[#12132d]">${title}</h1>
+            <div class="flex gap-2 pt-4 pb-4">
                 <img src="images/view.png" alt="">
                 <p class="text-[#12132d99] text-lg font-normal">${view}</p>
             </div>
             `
     appendTitle.appendChild(appendItem);
 }
-
-
 
 // search field
 
@@ -175,7 +178,23 @@ const toggleLoadingSpinnner = (isLoading) => {
     }
 
 }
-// setTimeout(toggleLoadingSpinnner, 2000)
+// settimeout
+let timeout;
+
+function myFunction() {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+        toggleLoadingSpinnner(true)
+    }, 5000);
+}
+
+function hideLoadingSpinner() {
+    toggleLoadingSpinnner(false);
+    clearTimeout(timeout);
+}
+
+
 
 
 fetchAllPost();
